@@ -37,6 +37,13 @@ public class Notification
 
     }
 
+    public void inputEvents()
+    {
+
+
+
+    }
+
     public void goUp()
     {
 
@@ -90,6 +97,13 @@ public class Notification
     {
 
         timer                       = newTimer;
+
+    }
+
+    public void destroy()
+    {
+
+        destroy                     = true;
 
     }
 

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.luca.graphtheory.GameScreen;
+import com.luca.graphtheory.forms.Notification;
 import com.luca.graphtheory.scenes.DebugGraph;
 import com.luca.graphtheory.scenes.IntroScene;
 import com.luca.graphtheory.scenes.MainScene;
@@ -104,9 +105,9 @@ public class Render
 
     //region Getters and Setters
     public static Scene getGraph()                                          { return debug; }
-    public static Scene getScene()                                          { return scene; }
+    public static MainScene getScene()                                      { return scene; }
     public static Scene getIntro()                                          { return intro; }
-    public static Scene getNotificationManager()                            { return notificationManager; }
+    public static NotificationManager getNotificationManager()              { return notificationManager; }
     //endregion
 
 }

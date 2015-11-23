@@ -4,9 +4,11 @@ package com.luca.graphtheory.scenes;
  * Created by Sas on 11/23/2015.
  */
 
+import com.luca.graphtheory.forms.AddEdgeNotification;
+import com.luca.graphtheory.forms.ErrorNotification;
 import com.luca.graphtheory.forms.Notification;
 import com.luca.graphtheory.assets.Scene;
-import com.luca.graphtheory.forms.TestNotification;
+import com.luca.graphtheory.forms.SimpleNotification;
 
 import java.util.ArrayList;
 
@@ -21,12 +23,6 @@ public class NotificationManager extends Scene
     {
 
         notifications                       = new ArrayList<Notification>();
-
-        addTestNotification("Test Notification 1");
-        addTestNotification("Test Notification 2");
-
-        //notifications.get(1).setOnHold(true);
-        notifications.get(0).               setTimer(1f);
 
     }
 
@@ -75,7 +71,12 @@ public class NotificationManager extends Scene
     public void update()
     {
 
+        for(Notification notification : notifications)
+        {
 
+            notification.inputEvents();
+
+        }
 
     }
 
@@ -87,11 +88,73 @@ public class NotificationManager extends Scene
 
     }
 
-    public void addTestNotification(String message)
+    //region Notification Builders
+
+    //region Simple Notification
+    public void addSimpleNotification(String message)
     {
 
-        notifications.                      add(new TestNotification(notifications.size(), message));
+        notifications.                      add(new SimpleNotification(notifications.size(), message));
 
     }
+
+    public void addSimpleNotification(String message, float timer)
+    {
+
+        notifications.                      add(new SimpleNotification(notifications.size(), message));
+
+        notifications.                      get(notifications.size() - 1).setTimer(timer);
+
+    }
+
+    public void addSimpleNotification(String message, boolean onHold)
+    {
+
+        notifications.                      add(new SimpleNotification(notifications.size(), message));
+
+        notifications.                      get(notifications.size() - 1).setOnHold(onHold);
+
+    }
+    //endregion
+
+    //region Error Notification
+    public void addErrorNotification(String message)
+    {
+
+        notifications.                      add(new ErrorNotification(notifications.size(), message));
+
+    }
+
+    public void addErrorNotification(String message, float timer)
+    {
+
+        notifications.                      add(new ErrorNotification(notifications.size(), message));
+
+        notifications.                      get(notifications.size() - 1).setTimer(timer);
+
+    }
+
+    public void addErrorNotification(String message, boolean onHold)
+    {
+
+        notifications.                      add(new ErrorNotification(notifications.size(), message));
+
+        notifications.                      get(notifications.size() - 1).setOnHold(onHold);
+
+    }
+    //endregion
+
+    //region Simple Notification
+    public void addAddEdgeNotification()
+    {
+
+        notifications.                      add(new AddEdgeNotification(notifications.size()));
+
+    }
+    //endregion
+
+    //endregion
+
+    public ArrayList<Notification> getNotifications() { return notifications; }
 
 }

@@ -31,6 +31,8 @@ public class MainScene extends Scene
     private     L_Button                                            checkConnectComponents;
 
     private     boolean                                             enterAnim;
+    private     boolean                                             setEdge;
+    private     boolean                                             edgeCreated;
 
     private     Graph                                               graph;
 
@@ -90,11 +92,18 @@ public class MainScene extends Scene
     protected void update()
     {
 
-        enableDebugDataBtn.                                         updateInput();
+        if (!setEdge)
+        {
 
-        createVertexBtn.                                            updateInput();
+            enableDebugDataBtn.                                     updateInput();
 
-        createEdgeBtn.                                              updateInput();
+            createVertexBtn.                                        updateInput();
+
+            createEdgeBtn.                                          updateInput();
+
+            edgeCreated                                             = false;
+
+        }
 
         graph.                                                      updateInput();
 
@@ -130,37 +139,71 @@ public class MainScene extends Scene
     protected void inputEvents()
     {
 
-        if(enableDebugDataBtn.isClicked() && !enableDebugDataBtn.isPressed())
+        if (!setEdge)
         {
 
-            if(!Render.getGraph().getRun())
+            if(enableDebugDataBtn.isReleased())
             {
 
-                Render.getGraph().                                  setRun(true);
+                if(!Render.getGraph().getRun())
+                {
 
-                enableDebugDataBtn.                                 setText("Disable Debug Data");
+                    Render.getGraph().                              setRun(true);
+
+                    enableDebugDataBtn.                             setText("Disable Debug Data");
+
+                    Render.getNotificationManager().                addSimpleNotification("Debug data enabled", 2.5f);
+
+                }
+                else
+                {
+
+                    Render.getGraph().                              setRun(false);
+
+                    enableDebugDataBtn.                             setText("Enable Debug Data");
+
+                    Render.getNotificationManager().                addSimpleNotification("Debug data disabled", 2.5f);
+
+                }
 
             }
-            else
+
+            if(createVertexBtn.isReleased())
             {
 
-                Render.getGraph().                                  setRun(false);
+                graph.                                              addVertex();
 
-                enableDebugDataBtn.                                 setText("Enable Debug Data");
+                Render.getNotificationManager().                    addSimpleNotification("Vertex " + graph.getNumberOfVertices() + " added", 2.5f);
 
             }
 
+            if(createEdgeBtn.isReleased() && !edgeCreated)
+            {
+
+                if(graph.getNumberOfVertices() >= 2)
+                {
+
+                    ce                                              = 1;
+
+                    setEdge                                         = true;
+
+                    edgeCreated                                     = true;
+
+                    Render.getNotificationManager().                addAddEdgeNotification();
+
+                }
+                else
+                {
+
+                    Render.getNotificationManager().                addErrorNotification("You need at least two vertices \nto create an edge", 5f);
+
+                }
+
+            }
+
+            graph.                                                  drag();
+
         }
-
-        if(createVertexBtn.isClicked() && !createVertexBtn.isPressed())
-        {
-
-            graph.                                                  addVertex();
-
-        }
-
-        //Vertices are only draggable if
-        graph.                                                      drag();
 
         //region Edge Generation
         if(ce == 2 && graph.getReleasedVertex() != 0 && !graph.getVertices().get(fv).isClicked())
@@ -168,9 +211,11 @@ public class MainScene extends Scene
 
             graph.                                                  addEdge(fv, graph.getReleasedVertex());
 
-            ce                                                      = 0;
+            ce                                                      = 3;
 
             graph.                                                  setDraggable(true);
+
+            Render.getNotificationManager().                        addSimpleNotification("Edge created between Vertex " + fv + " and " + graph.getReleasedVertex(), 2.5f);
 
         }
 
@@ -184,26 +229,23 @@ public class MainScene extends Scene
             if(graph.getDraggable()) graph.                         setDraggable(false);
 
         }
-
-        if(createEdgeBtn.isClicked() && !createEdgeBtn.isPressed())
-        {
-
-            if(graph.getNumberOfVertices() >= 2)
-            {
-
-                ce                                                  = 1;
-
-            }
-            else
-            {
-
-                System.out.                                         println("You need at least 2 vertices to create an edge");
-
-            }
-
-        }
         //endregion
 
     }
+
+    public void resetSetEdge()
+    {
+
+        ce                                                          = 0;
+
+        fv                                                          = 0;
+
+        setEdge                                                     = false;
+
+        graph.                                                      setDraggable(true);
+
+    }
+
+    public int getCe()                                              { return ce; }
 
 }
