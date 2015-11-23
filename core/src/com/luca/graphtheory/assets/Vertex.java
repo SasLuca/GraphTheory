@@ -12,6 +12,8 @@ import com.luca.graphtheory.forms.L_Sprite;
 public class Vertex extends L_Object
 {
 
+    //TODO: Change the shade of blue
+
     private     L_Sprite        vertexClickable;
     private     L_Sprite        vertexPressed;
     private     L_Sprite        vertexSelected;

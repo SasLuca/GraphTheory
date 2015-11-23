@@ -11,6 +11,8 @@ import com.luca.graphtheory.GameScreen;
 public class ErrorNotification extends  Notification
 {
 
+    //TODO: Text has color of selected graph
+
     private     L_Sprite    sprite;
     private     L_Label     message;
 

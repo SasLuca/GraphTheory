@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class Graph
 {
 
+    //TODO: Finish all the algorithms
+
     private     ArrayList<Edge>     edges                           = new ArrayList<Edge>();
 
     private     ArrayList<Vertex>   vertices                        = new ArrayList<Vertex>();

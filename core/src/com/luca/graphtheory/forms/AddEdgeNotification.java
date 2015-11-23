@@ -12,6 +12,8 @@ import com.luca.graphtheory.assets.Render;
 public class AddEdgeNotification extends Notification
 {
 
+    //TODO: Text has color of selected graph
+
     private     L_Label     message;
 
     private     L_Sprite    sprite;

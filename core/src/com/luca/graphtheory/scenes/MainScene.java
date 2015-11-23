@@ -20,6 +20,9 @@ public class MainScene extends Scene
 
     */
 
+    //TODO: Add ability to create multiple graphs with different colors
+    //TODO: Add buttons to check graph properties
+
     //Initialize a sprite
     private     L_Sprite                                            leftBar;
 

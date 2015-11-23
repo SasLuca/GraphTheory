@@ -11,6 +11,8 @@ import com.luca.graphtheory.GameScreen;
 public class SimpleNotification extends Notification
 {
 
+    //TODO: Text has color of selected graph
+
     private     L_Label     message;
 
     public SimpleNotification(int positionInStack, String text)

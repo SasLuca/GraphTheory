@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.luca.graphtheory.GameScreen;
-import com.luca.graphtheory.forms.Notification;
 import com.luca.graphtheory.scenes.DebugGraph;
 import com.luca.graphtheory.scenes.IntroScene;
 import com.luca.graphtheory.scenes.MainScene;
@@ -23,6 +22,8 @@ public class Render
         The class also contains a few helpful methods
 
     */
+
+    //TODO: Create PropertiesCard scene
 
     //Here we declare variables like the Scenes
     private     static      DebugGraph              debug                   = new DebugGraph();
